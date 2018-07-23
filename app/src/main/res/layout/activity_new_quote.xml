@@ -23,6 +23,20 @@
         android:src="@drawable/image_one"
         android:scaleType="centerCrop"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/quoteTextView"
+        android:text=""
+        android:textSize="@dimen/quote_text_size"
+        android:textStyle="bold"
+        android:layout_alignTop="@id/quoteImage"
+        android:layout_marginTop="@dimen/quote_text_margin"
+        android:layout_marginLeft="@dimen/quote_text_margin"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"/>
+
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
