@@ -46,6 +46,7 @@ public class NewQuoteActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //Toast.makeText(NewQuoteActivity.this, String.valueOf(charSequence), Toast.LENGTH_SHORT).show();
+                quoteTextView.setText(String.valueOf(charSequence));
             }
 
             @Override
@@ -57,7 +58,7 @@ public class NewQuoteActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
