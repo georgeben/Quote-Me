@@ -1,9 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/new_quote_layout_padding"
     tools:context="com.kurobarabenjamingeorge.quoteme.NewQuoteActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/newQuoteEditText"
+        android:hint="Enter your quote here"
+        android:maxLines="2"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/quoteImage"
+        android:layout_below="@id/newQuoteEditText"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/image_one"
+        android:scaleType="centerCrop"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textColourSpinner"
+        android:layout_below="@id/quoteImage"
+        android:layout_marginTop="10dp"></Spinner>
+
+
+</RelativeLayout>
