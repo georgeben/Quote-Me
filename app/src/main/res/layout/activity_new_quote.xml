@@ -44,5 +44,13 @@
         android:layout_below="@id/quoteImage"
         android:layout_marginTop="10dp"></Spinner>
 
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imagesRecyclerView"
+        android:layout_below="@id/textColourSpinner"
+        android:layout_marginTop="5dp">
 
+
+    </android.support.v7.widget.RecyclerView>
 </RelativeLayout>
