@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -109,5 +111,29 @@ public class NewQuoteActivity extends AppCompatActivity implements
     public void onImageItemClicked(int imagePosition) {
         Toast.makeText(this, Integer.toString(imagePosition), Toast.LENGTH_SHORT).show();
         quoteImage.setImageResource(images[imagePosition]);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_new_quote, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.action_save_quote:
+                Toast.makeText(this, "Saving quote", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_share:
+                Toast.makeText(this, "Sharing quote", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_cancel:
+                Toast.makeText(this, "Cancelling quote", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

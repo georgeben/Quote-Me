@@ -2,6 +2,9 @@
     <string name="app_name">Quote me</string>
     <string name="new_quote">New Quote</string>
     <string name="new_quote_title">New Quote</string>
+    <string name="save_quote">Save Quote</string>
+    <string name="action_share">Share</string>
+    <string name="action_cancel">Cancel</string>
 
     <!--String Array-->
     <string-array name="text_colour_options">
