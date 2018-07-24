@@ -1,5 +1,8 @@
 package com.kurobarabenjamingeorge.quoteme;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,11 +18,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kurobarabenjamingeorge.quoteme.adapter.BackgroundImageAdapter;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class NewQuoteActivity extends AppCompatActivity implements
@@ -32,6 +41,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
     private RecyclerView.LayoutManager layoutManager;
 
     private ImageView quoteImage;
+    private RelativeLayout quoteLayout;
 
     private int[] images = {R.drawable.image_one, R.drawable.image_two, R.drawable.image_one, R.drawable.image_two,
             R.drawable.image_one, R.drawable.image_two,R.drawable.image_one, R.drawable.image_two};
@@ -60,6 +70,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
 
         quoteImage = (ImageView) findViewById(R.id.quoteImage);
+        quoteLayout = (RelativeLayout) findViewById(R.id.quoteLayout);
 
         backgroundImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -123,7 +134,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.action_save_quote:
-                Toast.makeText(this, "Saving quote", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Saving quote", Toast.LENGTH_SHORT).show();
+                saveQuoteImage();
                 return true;
             case R.id.action_share:
                 Toast.makeText(this, "Sharing quote", Toast.LENGTH_SHORT).show();
@@ -135,5 +147,35 @@ public class NewQuoteActivity extends AppCompatActivity implements
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    private void saveQuoteImage() {
+        quoteLayout.setDrawingCacheEnabled(true);
+        Bitmap b = quoteLayout.getDrawingCache();
+        Bitmap quoteBitmap = b.copy(Bitmap.Config.ARGB_8888, false);
+        File file,f;
+        f = null;
+
+        if(android.os.Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            file = new File(android.os.Environment.getExternalStorageDirectory(), "Quote Me");
+            if(!file.exists()){
+                file.mkdirs();
+            }
+
+            f = new File(file.getAbsolutePath()+ "/filename"+".png");
+        }
+
+        try{
+            FileOutputStream ostream = new FileOutputStream(f);
+            quoteBitmap.compress(Bitmap.CompressFormat.PNG, 10, ostream);
+            ostream.close();
+
+            Toast.makeText(NewQuoteActivity.this, "Save successful", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
