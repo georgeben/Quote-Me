@@ -16,7 +16,8 @@ import android.widget.Toast;
 
 import com.kurobarabenjamingeorge.quoteme.adapter.BackgroundImageAdapter;
 
-public class NewQuoteActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class NewQuoteActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener, BackgroundImageAdapter.OnBackgroundImageItemClicked{
 
     private EditText newQuoteEditText;
     private TextView quoteTextView;
@@ -40,7 +41,7 @@ public class NewQuoteActivity extends AppCompatActivity implements AdapterView.O
         backgroundImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         backgroundImagesRecyclerView.setLayoutManager(layoutManager);
-        BackgroundImageAdapter backgroundImageAdapter = new BackgroundImageAdapter(this, images);
+        BackgroundImageAdapter backgroundImageAdapter = new BackgroundImageAdapter(this, images, this);
         backgroundImagesRecyclerView.setAdapter(backgroundImageAdapter);
 
         ArrayAdapter<CharSequence> textColourSpinnerAdapter = ArrayAdapter.createFromResource(NewQuoteActivity.this,
@@ -80,5 +81,10 @@ public class NewQuoteActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onImageItemClicked(int imagePosition) {
+        Toast.makeText(this, Integer.toString(imagePosition), Toast.LENGTH_SHORT).show();
     }
 }

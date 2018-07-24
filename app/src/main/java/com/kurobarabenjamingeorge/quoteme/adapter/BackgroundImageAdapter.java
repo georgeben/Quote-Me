@@ -17,10 +17,16 @@ public class BackgroundImageAdapter extends RecyclerView.Adapter<BackgroundImage
 
     private Context mContext;
     private int[] mImages;
+    private OnBackgroundImageItemClicked mListener;
 
-    public BackgroundImageAdapter(Context context, int[] images){
+    public interface OnBackgroundImageItemClicked{
+        void onImageItemClicked(int imagePosition);
+    }
+
+    public BackgroundImageAdapter(Context context, int[] images, OnBackgroundImageItemClicked listener){
         mContext = context;
         mImages = images;
+        mListener = listener;
     }
 
     @Override
@@ -39,13 +45,19 @@ public class BackgroundImageAdapter extends RecyclerView.Adapter<BackgroundImage
         return mImages.length;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView backgroundImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             backgroundImage = (ImageView) itemView.findViewById(R.id.backgroundImage);
+            backgroundImage.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onImageItemClicked(getAdapterPosition());
         }
     }
 }
