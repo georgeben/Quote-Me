@@ -1,5 +1,6 @@
 package com.kurobarabenjamingeorge.quoteme;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,19 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private int[] images = {R.drawable.image_one, R.drawable.image_two, R.drawable.image_one, R.drawable.image_two,
             R.drawable.image_one, R.drawable.image_two,R.drawable.image_one, R.drawable.image_two};
+
+    private String[] colours = {"red", "blue", "green", "orange", "yellow"};
+
+    private void changeQuoteTextColour(String colour){
+        Log.i("Selected colour:", colour);
+        //Retrieves the ID for the selected colour
+        int colourId = getResources().getIdentifier(colour, "color", getApplicationContext().getPackageName());
+        Log.i("Colour id:", String.valueOf(colourId));
+        int colourRes = ContextCompat.getColor(this, colourId);
+        Log.i("Colour resource:", String.valueOf(colourRes));
+        quoteTextView.setTextColor(colourRes);
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +97,12 @@ public class NewQuoteActivity extends AppCompatActivity implements
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
+        changeQuoteTextColour(adapterView.getItemAtPosition(i).toString().toLowerCase());
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
+        changeQuoteTextColour("red");
     }
 
     @Override
