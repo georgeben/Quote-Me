@@ -6,15 +6,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kurobarabenjamingeorge.quoteme.adapter.BackgroundImageAdapter;
+
 
 public class NewQuoteActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, BackgroundImageAdapter.OnBackgroundImageItemClicked{
@@ -24,6 +27,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private RecyclerView backgroundImagesRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
+
+    private ImageView quoteImage;
 
     private int[] images = {R.drawable.image_one, R.drawable.image_two, R.drawable.image_one, R.drawable.image_two,
             R.drawable.image_one, R.drawable.image_two,R.drawable.image_one, R.drawable.image_two};
@@ -37,6 +42,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
+
+        quoteImage = (ImageView) findViewById(R.id.quoteImage);
 
         backgroundImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -86,5 +93,6 @@ public class NewQuoteActivity extends AppCompatActivity implements
     @Override
     public void onImageItemClicked(int imagePosition) {
         Toast.makeText(this, Integer.toString(imagePosition), Toast.LENGTH_SHORT).show();
+        quoteImage.setImageResource(images[imagePosition]);
     }
 }
