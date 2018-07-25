@@ -152,7 +152,42 @@ public class NewQuoteActivity extends AppCompatActivity implements
     }
 
     private void saveQuoteImage() {
-        quoteLayout.setDrawingCacheEnabled(true);
+
+        AlertDialog.Builder saveQuoteAlertBuilder = new AlertDialog.Builder(NewQuoteActivity.this);
+
+        View saveQuoteCustomView = getLayoutInflater().inflate(R.layout.save_dialog_layout, null);
+        final EditText quoteNameEditText = saveQuoteCustomView.findViewById(R.id.quoteNameEditText);
+        Button saveQuoteButton = (Button) saveQuoteCustomView.findViewById(R.id.save_quote_button);
+        Button cancelDialogButton = (Button) saveQuoteCustomView.findViewById(R.id.cancel_dialog_button);
+
+        saveQuoteAlertBuilder.setView(saveQuoteCustomView);
+
+        final AlertDialog saveQuoteDialog = saveQuoteAlertBuilder.create();
+        saveQuoteDialog.show();
+
+        saveQuoteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!quoteNameEditText.getText().toString().trim().isEmpty()){
+                    saveQuoteDialog.dismiss();
+
+                }else{
+                    Toast.makeText(NewQuoteActivity.this, R.string.save_quote_warning, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+
+        cancelDialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveQuoteDialog.dismiss();
+
+            }
+        });
+
+
+/*        quoteLayout.setDrawingCacheEnabled(true);
         Bitmap b = quoteLayout.getDrawingCache();
         Bitmap quoteBitmap = b.copy(Bitmap.Config.ARGB_8888, false);
         File file,f;
@@ -177,7 +212,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 }
