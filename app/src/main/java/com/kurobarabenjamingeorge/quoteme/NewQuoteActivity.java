@@ -153,6 +153,11 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private void saveQuoteImage() {
 
+        if(quoteTextView.getText().toString().trim().isEmpty()){
+            Toast.makeText(this, "Cannot save an empty quote", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder saveQuoteAlertBuilder = new AlertDialog.Builder(NewQuoteActivity.this);
 
         View saveQuoteCustomView = getLayoutInflater().inflate(R.layout.save_dialog_layout, null);
