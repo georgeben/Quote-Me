@@ -169,6 +169,35 @@ public class NewQuoteActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 if(!quoteNameEditText.getText().toString().trim().isEmpty()){
+
+                    String nameOfQuote = quoteNameEditText.getText().toString().trim();
+
+                    quoteLayout.setDrawingCacheEnabled(true);
+                    Bitmap b = quoteLayout.getDrawingCache();
+                    Bitmap quoteBitmap = b.copy(Bitmap.Config.ARGB_8888, false);
+                    File file,f;
+                    f = null;
+
+                    if(android.os.Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+                        file = new File(android.os.Environment.getExternalStorageDirectory(), "Quote Me");
+                        if(!file.exists()){
+                            file.mkdirs();
+                        }
+
+                        f = new File(file.getAbsolutePath()+ "/" + nameOfQuote+".png");
+                    }
+
+                    try{
+                        FileOutputStream ostream = new FileOutputStream(f);
+                        quoteBitmap.compress(Bitmap.CompressFormat.PNG, 10, ostream);
+                        ostream.close();
+
+                        Toast.makeText(NewQuoteActivity.this, "Save successful", Toast.LENGTH_SHORT).show();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     saveQuoteDialog.dismiss();
 
                 }else{
@@ -187,32 +216,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
         });
 
 
-/*        quoteLayout.setDrawingCacheEnabled(true);
-        Bitmap b = quoteLayout.getDrawingCache();
-        Bitmap quoteBitmap = b.copy(Bitmap.Config.ARGB_8888, false);
-        File file,f;
-        f = null;
 
-        if(android.os.Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            file = new File(android.os.Environment.getExternalStorageDirectory(), "Quote Me");
-            if(!file.exists()){
-                file.mkdirs();
-            }
-
-            f = new File(file.getAbsolutePath()+ "/filename"+".png");
-        }
-
-        try{
-            FileOutputStream ostream = new FileOutputStream(f);
-            quoteBitmap.compress(Bitmap.CompressFormat.PNG, 10, ostream);
-            ostream.close();
-
-            Toast.makeText(NewQuoteActivity.this, "Save successful", Toast.LENGTH_SHORT).show();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
 
     }
 }
