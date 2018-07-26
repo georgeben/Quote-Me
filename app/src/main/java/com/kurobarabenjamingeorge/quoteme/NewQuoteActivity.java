@@ -1,8 +1,11 @@
 package com.kurobarabenjamingeorge.quoteme;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -50,13 +53,12 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private String[] colours = {"red", "blue", "green", "orange", "yellow"};
 
+    private static final int GALLERY_REQUEST = 1;
+
     private void changeQuoteTextColour(String colour){
-        Log.i("Selected colour:", colour);
         //Retrieves the ID for the selected colour
         int colourId = getResources().getIdentifier(colour, "color", getApplicationContext().getPackageName());
-        Log.i("Colour id:", String.valueOf(colourId));
         int colourRes = ContextCompat.getColor(this, colourId);
-        Log.i("Colour resource:", String.valueOf(colourRes));
         quoteTextView.setTextColor(colourRes);
 
     }
@@ -223,5 +225,31 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
 
 
+    }
+
+    public void pickFromGallery(View view) {
+        //Toast.makeText(this, "Picking from gallery", Toast.LENGTH_SHORT).show();
+        String mimeType = "image/*";
+        Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType(mimeType);
+        startActivityForResult(galleryIntent, GALLERY_REQUEST);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode ==  GALLERY_REQUEST && resultCode == RESULT_OK && data!= null && data.getData() != null){
+            Uri imageUri  = data.getData();
+
+            try{
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri);
+                quoteImage.setImageBitmap(imageBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -59,7 +59,8 @@
         android:id="@+id/pickFromGallery"
         android:src="@drawable/ic_photo_library_black_24dp"
         android:layout_alignTop="@id/imagesRecyclerView"
-        android:layout_marginRight="5dp"/>
+        android:layout_marginRight="5dp"
+        android:onClick="pickFromGallery"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
