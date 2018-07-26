@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -56,6 +57,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private static final int GALLERY_REQUEST = 1;
 
+    float dX, dY, startTextX, startTextY;
+
     private void changeQuoteTextColour(String colour){
         //Retrieves the ID for the selected colour
         int colourId = getResources().getIdentifier(colour, "color", getApplicationContext().getPackageName());
@@ -73,6 +76,9 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
+
+        startTextX = quoteTextView.getX();
+        startTextY = quoteTextView.getY();
 
         quoteImage = (ImageView) findViewById(R.id.quoteImage);
         quoteLayout = (RelativeLayout) findViewById(R.id.quoteLayout);
@@ -114,6 +120,54 @@ public class NewQuoteActivity extends AppCompatActivity implements
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+        quoteTextView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                float lastAction;
+                switch(motionEvent.getActionMasked()){
+                    case MotionEvent.ACTION_DOWN:
+                        //Toast.makeText(NewQuoteActivity.this, "Action down", Toast.LENGTH_SHORT).show();
+                        dX = view.getX() - motionEvent.getRawX();
+                        dY = view.getY() - motionEvent.getRawY();
+                        lastAction = MotionEvent.ACTION_DOWN;
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        //Toast.makeText(NewQuoteActivity.this, "Moving", Toast.LENGTH_SHORT).show();
+                        view.setY(motionEvent.getRawY() + dY);
+                        view.setX(motionEvent.getRawX() + dX);
+                        lastAction = MotionEvent.ACTION_MOVE;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        float targetX = quoteImage.getX();
+                        float targetY =quoteImage.getY();
+                        float textX = quoteTextView.getX();
+                        float textY = quoteTextView.getY();
+                        float textWidth = quoteTextView.getWidth();
+                        float textHeight = quoteTextView.getHeight();
+                        float targetWidth = quoteImage.getWidth();
+                        float targetHeight = quoteImage.getHeight();
+
+                        Log.i("text width", String.valueOf(textWidth));
+
+                        if(textX > targetX && textX < targetX+targetWidth && textX+textWidth < targetX+targetWidth){
+                            if(textY > targetY && textY < targetY + targetHeight && textY + textHeight > targetY){
+                                Toast.makeText(NewQuoteActivity.this, "Within target", Toast.LENGTH_SHORT).show();
+
+                            }else{
+                                Toast.makeText(NewQuoteActivity.this, "Off target", Toast.LENGTH_SHORT).show();
+                                quoteTextView.setX(startTextX);
+                                quoteTextView.setY(startTextY);
+                            }
+                        }
+                        //Toast.makeText(NewQuoteActivity.this, "Action Up", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
