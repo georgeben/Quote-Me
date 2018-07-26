@@ -53,12 +53,21 @@
         android:layout_below="@id/quoteLayout"
         android:layout_marginTop="10dp"></Spinner>
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:id="@+id/pickFromGallery"
+        android:src="@drawable/ic_photo_library_black_24dp"
+        android:layout_alignTop="@id/imagesRecyclerView"
+        android:layout_marginRight="5dp"/>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="60dp"
         android:id="@+id/imagesRecyclerView"
         android:layout_below="@id/textColourSpinner"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@id/pickFromGallery">
 
 
     </android.support.v7.widget.RecyclerView>
