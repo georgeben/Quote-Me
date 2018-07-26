@@ -8,6 +8,8 @@
     <string name="save_quote_dialog_title">Save Quote</string>
     <string name="save_quote_message">Finished creating quote? Save it now to share with friends</string>
     <string name="save_quote_warning">Please enter the name of the quote</string>
+    <string name="discard_quote">Discard quote</string>
+    <string name="discard_quote_dialog_message">Are you sure you want to discard this quote?</string>
 
     <!--String Array-->
     <string-array name="text_colour_options">

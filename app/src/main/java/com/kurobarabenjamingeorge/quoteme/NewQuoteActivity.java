@@ -1,5 +1,6 @@
 package com.kurobarabenjamingeorge.quoteme;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -109,6 +110,10 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
             }
         });
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -147,6 +152,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
             case R.id.action_cancel:
                 Toast.makeText(this, "Cancelling quote", Toast.LENGTH_SHORT).show();
                 return true;
+            case android.R.id.home:
+                Toast.makeText(this, "Up button pressed", Toast.LENGTH_SHORT).show();
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -251,5 +258,35 @@ public class NewQuoteActivity extends AppCompatActivity implements
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        showDiscardQuoteConfirmDialog();
+    }
+
+    private void showDiscardQuoteConfirmDialog(){
+        AlertDialog.Builder confirmDialogBuilder = new AlertDialog.Builder(NewQuoteActivity.this);
+        confirmDialogBuilder.setTitle(R.string.discard_quote);
+        confirmDialogBuilder.setMessage(R.string.discard_quote_dialog_message);
+
+        confirmDialogBuilder.setPositiveButton("DISCARD", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+
+        confirmDialogBuilder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+
+        AlertDialog discardQuoteConfirmDialog = confirmDialogBuilder.create();
+
+        discardQuoteConfirmDialog.show();
+
     }
 }
