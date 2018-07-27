@@ -86,7 +86,8 @@
         android:id="@+id/imagesRecyclerView"
         android:layout_marginTop="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/pickFromGallery">
+        android:layout_toRightOf="@id/pickFromGallery"
+        android:layout_marginBottom="10dp">
 
 
     </android.support.v7.widget.RecyclerView>
