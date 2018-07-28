@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     private EditText newQuoteEditText;
     private TextView quoteTextView;
+    private SeekBar textSizeSeekbar;
 
     private RecyclerView backgroundImagesRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -76,6 +78,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
+        textSizeSeekbar = (SeekBar) findViewById(R.id.textSizeSeekbar);
 
         startTextX = quoteTextView.getX();
         startTextY = quoteTextView.getY();
@@ -168,6 +171,30 @@ public class NewQuoteActivity extends AppCompatActivity implements
                 return true;
             }
         });
+
+        textSizeSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                updateTextSize(i);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private void updateTextSize(int progress) {
+        float newTextSize = progress/2;
+        if(newTextSize > 10 && newTextSize < 50){
+            quoteTextView.setTextSize(newTextSize);
+        }
     }
 
     @Override

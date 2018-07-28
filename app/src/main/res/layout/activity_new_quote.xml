@@ -69,7 +69,9 @@
         android:id="@+id/textSizeSeekbar"
         android:layout_alignTop="@id/textSizeLabel"
         android:layout_toRightOf="@id/textSizeLabel"
-        android:layout_marginLeft="5dp"></SeekBar>
+        android:layout_marginLeft="5dp"
+        android:max="100"
+        android:progress="20"></SeekBar>
 
     <ImageView
         android:layout_width="60dp"
@@ -85,7 +87,7 @@
         android:layout_height="60dp"
         android:id="@+id/imagesRecyclerView"
         android:layout_marginTop="5dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@id/textSizeSeekbar"
         android:layout_toRightOf="@id/pickFromGallery"
         android:layout_marginBottom="10dp">
 
