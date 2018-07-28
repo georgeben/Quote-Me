@@ -150,11 +150,11 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
                         Log.i("text width", String.valueOf(textWidth));
 
-                        if(textX > targetX && textX+textWidth < targetX+targetWidth){
-                            if(textY > targetY && textY + textHeight < targetY + targetHeight){
+                        if(textX > targetX && textX+textWidth < targetX+targetWidth &&
+                                textY > targetY && textY + textHeight < targetY + targetHeight){
+
                                 Toast.makeText(NewQuoteActivity.this, "Within target", Toast.LENGTH_SHORT).show();
 
-                            }
                         }else{
                             Toast.makeText(NewQuoteActivity.this, "Off target", Toast.LENGTH_SHORT).show();
                             quoteTextView.setX(startTextX);
