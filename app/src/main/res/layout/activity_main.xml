@@ -6,12 +6,20 @@
     android:layout_height="match_parent"
     tools:context="com.kurobarabenjamingeorge.quoteme.MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/quoteme_bg"
+        android:scaleType="centerCrop"/>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/newQuoteBtn"
         android:text="@string/new_quote"
         android:layout_centerInParent="true"
-        android:onClick="loadNewQuoteActivity"/>
+        android:onClick="loadNewQuoteActivity"
+        android:textColor="@color/colorPrimary"
+        android:background="@drawable/rounded_button"/>
 
 </RelativeLayout>
