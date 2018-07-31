@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -11,11 +12,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -32,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kurobarabenjamingeorge.quoteme.adapter.BackgroundImageAdapter;
+import com.kurobarabenjamingeorge.quoteme.adapter.TextColourAdapter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,6 +49,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
     private EditText newQuoteEditText;
     private TextView quoteTextView;
     private SeekBar textSizeSeekbar;
+    private ImageView colourPicker;
 
     private RecyclerView backgroundImagesRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -55,7 +60,8 @@ public class NewQuoteActivity extends AppCompatActivity implements
     private int[] images = {R.drawable.image_one, R.drawable.image_two, R.drawable.image_one, R.drawable.image_two,
             R.drawable.image_one, R.drawable.image_two,R.drawable.image_one, R.drawable.image_two};
 
-    private String[] colours = {"red", "blue", "green", "orange", "yellow"};
+    private int[] colours = {R.color.blue, R.color.black, R.color.yellow, R.color.orange,
+                                            R.color.green, R.color.white};
 
     private static final int GALLERY_REQUEST = 1;
 
@@ -79,6 +85,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
         textSizeSeekbar = (SeekBar) findViewById(R.id.textSizeSeekbar);
+        colourPicker = (ImageView) findViewById(R.id.colourPicker);
 
         startTextX = quoteTextView.getX();
         startTextY = quoteTextView.getY();
@@ -200,7 +207,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
-        changeQuoteTextColour(adapterView.getItemAtPosition(i).toString().toLowerCase());
+        //changeQuoteTextColour(adapterView.getItemAtPosition(i).toString().toLowerCase());
     }
 
     @Override
@@ -369,5 +376,33 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
         discardQuoteConfirmDialog.show();
 
+    }
+
+    public void changeTextColour(View view) {
+        int numberOfColumns = 6;
+
+        View colourPickerDialogView = LayoutInflater.from(NewQuoteActivity.this).inflate(R.layout.colour_chooser_dialog, null);
+
+        AlertDialog.Builder colourPickerDialogBulder = new AlertDialog.Builder(NewQuoteActivity.this);
+        colourPickerDialogBulder.setView(colourPickerDialogView);
+        final AlertDialog colourPickerDialog = colourPickerDialogBulder.create();
+
+        TextColourAdapter.OnColourListPicked onColourListPicked = new TextColourAdapter.OnColourListPicked() {
+            @Override
+            public void onColourPicked(int position) {
+                int colourRes = ContextCompat.getColor(NewQuoteActivity.this, colours[position]);
+                quoteTextView.setTextColor(colourRes);
+                colourPicker.setBackgroundResource(colours[position]);
+                colourPickerDialog.dismiss();
+            }
+        };
+
+        RecyclerView colourRecyclerView = colourPickerDialogView.findViewById(R.id.colourRecyclerView);
+        colourRecyclerView.setLayoutManager(new GridLayoutManager(this, numberOfColumns));
+        TextColourAdapter adapter = new TextColourAdapter(NewQuoteActivity.this, colours, onColourListPicked);
+        colourRecyclerView.setAdapter(adapter);
+
+
+        colourPickerDialog.show();
     }
 }

@@ -12,7 +12,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/newQuoteEditText"
         android:hint="Enter your quote here"
-        android:maxLines="2"/>
+        android:maxLines="1"
+        android:layout_toLeftOf="@id/colourPicker"/>
+
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/colourPicker"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/red"
+        android:layout_alignTop="@id/newQuoteEditText"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:onClick="changeTextColour"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
