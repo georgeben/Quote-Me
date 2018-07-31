@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         appBackgroundImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Okay dokey", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Okay dokey", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, SelectBackgroundActivity.class));
             }
         });
 

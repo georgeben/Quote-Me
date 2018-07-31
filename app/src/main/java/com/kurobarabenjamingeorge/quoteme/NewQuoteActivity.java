@@ -94,7 +94,13 @@ public class NewQuoteActivity extends AppCompatActivity implements
             }
 
 
+        }else if(incomingntent.hasExtra(SelectBackgroundActivity.SELECTED_BG)){
+            int selectedBackgroundId = incomingntent.getIntExtra(SelectBackgroundActivity.SELECTED_BG,
+                    R.drawable.image_one);
+            quoteImage.setImageResource(selectedBackgroundId);
         }
+
+
 
         startTextX = quoteTextView.getX();
         startTextY = quoteTextView.getY();
@@ -349,6 +355,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 finish();
+                startActivity(new Intent(NewQuoteActivity.this, MainActivity.class));
             }
         });
 
