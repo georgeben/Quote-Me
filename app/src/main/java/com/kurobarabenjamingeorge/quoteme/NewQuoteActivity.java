@@ -41,6 +41,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 
 public class NewQuoteActivity extends AppCompatActivity implements
@@ -73,17 +75,29 @@ public class NewQuoteActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_quote);
 
-
+        quoteImage = (ImageView) findViewById(R.id.quoteImage);
+        quoteLayout = (RelativeLayout) findViewById(R.id.quoteLayout);
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
         textSizeSeekbar = (SeekBar) findViewById(R.id.textSizeSeekbar);
         colourPicker = (ImageView) findViewById(R.id.colourPicker);
 
+        Intent incomingntent = getIntent();
+        if(incomingntent.hasExtra(MainActivity.SELECTED_PHOTO_EXTRA)){
+            String selectedImageUri = incomingntent.getStringExtra(MainActivity.SELECTED_PHOTO_EXTRA);
+            Uri quoteImageUri = Uri.parse(selectedImageUri);
+            try {
+                Bitmap selectedBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), quoteImageUri);
+                quoteImage.setImageBitmap(selectedBitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
         startTextX = quoteTextView.getX();
         startTextY = quoteTextView.getY();
-
-        quoteImage = (ImageView) findViewById(R.id.quoteImage);
-        quoteLayout = (RelativeLayout) findViewById(R.id.quoteLayout);
 
         backgroundImagesRecyclerView = (RecyclerView) findViewById(R.id.imagesRecyclerView);
         layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

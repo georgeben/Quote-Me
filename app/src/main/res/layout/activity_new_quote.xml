@@ -21,7 +21,7 @@
         android:id="@+id/colourPicker"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/image_border"line
+        android:background="@drawable/image_border"
         android:layout_alignTop="@id/newQuoteEditText"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
@@ -79,7 +79,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/pickFromGallery"
-        android:src="@drawable/ic_photo_library_black_24dp"
+        android:src="@drawable/gallery_ic"
         android:layout_alignTop="@id/imagesRecyclerView"
         android:layout_marginRight="5dp"
         android:onClick="pickFromGallery"/>
