@@ -21,7 +21,7 @@
         android:id="@+id/colourPicker"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="@color/red"
+        android:background="@drawable/image_border"line
         android:layout_alignTop="@id/newQuoteEditText"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
@@ -57,23 +57,12 @@
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
-
-
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textColourSpinner"
-        android:layout_below="@id/quoteLayout"
-        android:layout_marginTop="10dp"></Spinner>
-
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Text Size"
         android:id="@+id/textSizeLabel"
-        android:layout_below="@id/textColourSpinner"
+        android:layout_below="@id/quoteLayout"
         android:layout_marginTop="5dp"/>
 
     <SeekBar

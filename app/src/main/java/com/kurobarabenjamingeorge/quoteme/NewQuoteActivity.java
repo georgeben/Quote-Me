@@ -44,7 +44,7 @@ import java.io.IOException;
 
 
 public class NewQuoteActivity extends AppCompatActivity implements
-        AdapterView.OnItemSelectedListener, BackgroundImageAdapter.OnBackgroundImageItemClicked{
+        BackgroundImageAdapter.OnBackgroundImageItemClicked{
 
     private EditText newQuoteEditText;
     private TextView quoteTextView;
@@ -67,20 +67,12 @@ public class NewQuoteActivity extends AppCompatActivity implements
 
     float dX, dY, startTextX, startTextY;
 
-    private void changeQuoteTextColour(String colour){
-        //Retrieves the ID for the selected colour
-        int colourId = getResources().getIdentifier(colour, "color", getApplicationContext().getPackageName());
-        int colourRes = ContextCompat.getColor(this, colourId);
-        quoteTextView.setTextColor(colourRes);
-
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_quote);
 
-        Spinner textColourSpinner = (Spinner) findViewById(R.id.textColourSpinner);
 
         newQuoteEditText = (EditText) findViewById(R.id.newQuoteEditText);
         quoteTextView = (TextView) findViewById(R.id.quoteTextView);
@@ -98,15 +90,6 @@ public class NewQuoteActivity extends AppCompatActivity implements
         backgroundImagesRecyclerView.setLayoutManager(layoutManager);
         BackgroundImageAdapter backgroundImageAdapter = new BackgroundImageAdapter(this, images, this);
         backgroundImagesRecyclerView.setAdapter(backgroundImageAdapter);
-
-        ArrayAdapter<CharSequence> textColourSpinnerAdapter = ArrayAdapter.createFromResource(NewQuoteActivity.this,
-                R.array.text_colour_options, android.R.layout.simple_spinner_item);
-
-        textColourSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        textColourSpinner.setAdapter(textColourSpinnerAdapter);
-
-        textColourSpinner.setOnItemSelectedListener(this);
 
         //Detecting when the user has started typing
         newQuoteEditText.addTextChangedListener(new TextWatcher() {
@@ -204,16 +187,6 @@ public class NewQuoteActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //Toast.makeText(this, adapterView.getItemAtPosition(i).toString(), Toast.LENGTH_SHORT).show();
-        //changeQuoteTextColour(adapterView.getItemAtPosition(i).toString().toLowerCase());
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-        changeQuoteTextColour("red");
-    }
 
     @Override
     public void onImageItemClicked(int imagePosition) {
@@ -392,7 +365,7 @@ public class NewQuoteActivity extends AppCompatActivity implements
             public void onColourPicked(int position) {
                 int colourRes = ContextCompat.getColor(NewQuoteActivity.this, colours[position]);
                 quoteTextView.setTextColor(colourRes);
-                colourPicker.setBackgroundResource(colours[position]);
+                colourPicker.setImageResource(colours[position]);
                 colourPickerDialog.dismiss();
             }
         };

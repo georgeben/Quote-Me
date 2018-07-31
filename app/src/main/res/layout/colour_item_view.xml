@@ -8,6 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/colourIcon"/>
+        android:id="@+id/colourIcon"
+        android:background="@drawable/image_border"/>
 
 </LinearLayout>

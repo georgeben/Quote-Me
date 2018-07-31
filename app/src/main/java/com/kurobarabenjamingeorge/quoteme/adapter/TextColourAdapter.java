@@ -36,7 +36,7 @@ public class TextColourAdapter extends RecyclerView.Adapter<TextColourAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.colourImageView.setBackgroundResource(colours[position]);
+        holder.colourImageView.setImageResource(colours[position]);
 
     }
 
