@@ -10,6 +10,14 @@
     <string name="save_quote_warning">Please enter the name of the quote</string>
     <string name="discard_quote">Discard quote</string>
     <string name="discard_quote_dialog_message">Are you sure you want to discard this quote?</string>
+    <string name="save_quote_dialog">Save Quote</string>
+    <string name="cancel_quote_dialog">Cancel</string>
+    <string name="save_quote_edittext_hint">Enter the name of the quote here</string>
+    <string name="quote_image_chooser_message">Choose option for quote image</string>
+    <string name="gallery">Gallery</string>
+    <string name="backgrounds">Backgrounds</string>
+    <string name="select_text_colour">Select Text Colour</string>
+    <string name="enter_your_quote_here">Enter your quote here</string>
 
     <!--String Array-->
     <string-array name="text_colour_options">

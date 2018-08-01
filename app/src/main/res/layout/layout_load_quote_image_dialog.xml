@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose option for quote image"
+        android:text="@string/quote_image_chooser_message"
         android:textSize="17sp"
         android:textStyle="bold"/>
 
@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Gallery"
+                android:text="@string/gallery"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"/>
 
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Backgrounds"
+                android:text="@string/backgrounds"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"/>
 

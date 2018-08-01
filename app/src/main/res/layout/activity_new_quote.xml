@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/newQuoteEditText"
-        android:hint="Enter your quote here"
+        android:hint="@string/enter_your_quote_here"
         android:maxLines="1"
         android:layout_toLeftOf="@id/colourPicker"/>
 

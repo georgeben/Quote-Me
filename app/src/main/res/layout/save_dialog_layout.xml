@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/quoteNameEditText"
-        android:hint="Enter the name of the quote here"/>
+        android:hint="@string/save_quote_edittext_hint"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:background="@drawable/rounded_button"
             android:id="@+id/save_quote_button"
-            android:text="Save Quote"
+            android:text="@string/save_quote_dialog"
             android:textColor="@color/colorPrimary"
             android:textAllCaps="false"
             android:layout_margin="5dp"/>
@@ -50,11 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/cancel_dialog_button"
-            android:text="Cancel"
+            android:text="@string/cancel_quote_dialog"
             android:textColor="@color/colorPrimary"
             android:background="@drawable/rounded_button"
             android:textAllCaps="false"
-            android:layout_margin="5dp"/>
+            android:layout_margin="@dimen/vertical_margin_between_items"/>
 
     </LinearLayout>
 </LinearLayout>
